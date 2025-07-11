@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { SERVER_URL } from '../serverConfig';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -19,7 +20,7 @@ function App() {
   const fetchItems = async () => {
     setIsLoadingItems(true);
     try {
-      const response = await fetch('http://localhost:3000/items', { credentials: 'include' });
+      const response = await fetch(`${SERVER_URL}/items`, { credentials: 'include' });
       const data = await response.json();
       setItems(data.items);
       setSessionId(data.sessionId);
@@ -35,7 +36,7 @@ function App() {
     setIsAdding(true);
     try {
       await axios.post(
-        'http://localhost:3000/items',
+        `${SERVER_URL}/items`,
         { name: newItemName },
         { withCredentials: true }
       );
@@ -52,7 +53,7 @@ function App() {
     if (!editItem.name) return;
     setIsUpdating(id);
     try {
-      const response = await fetch(`http://localhost:3000/items/${id}`, {
+      const response = await fetch(`${SERVER_URL}/items/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: editItem.name }),
@@ -72,7 +73,7 @@ function App() {
   const deleteItem = async (id) => {
     setIsDeleting(id);
     try {
-      const response = await fetch(`http://localhost:3000/items/${id}`, {
+      const response = await fetch(`${SERVER_URL}/items/${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });
