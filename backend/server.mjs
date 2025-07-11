@@ -2,12 +2,18 @@ import express from 'express';
 import { randomUUID } from 'crypto';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 const userItems = {}; // In-memory storage: { sessionId: [{ id, name }, ...], sessionId: [{ id, name } }
 
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+// console.log(process.env.PORT);
+// console.log(process.env.CORS_ALLOWED_LIST);
+
+
+app.use(cors({ origin: [ process.env.CORS_ALLOWED_LIST.split(',') ], credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
