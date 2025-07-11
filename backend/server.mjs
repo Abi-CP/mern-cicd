@@ -17,6 +17,10 @@ app.use(cors({ origin: [ process.env.CORS_ALLOWED_LIST.split(',') ], credentials
 app.use(express.json());
 app.use(cookieParser());
 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
 // Middleware to ensure sessionId is set
 app.use((req, res, next) => {
   let sessionId = req.cookies.sessionId;
