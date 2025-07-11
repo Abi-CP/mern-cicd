@@ -89,7 +89,7 @@ function App() {
 
   return (
     <div className="p-4 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Items Manager</h1>
+      <h1 className="text-2xl font-bold mb-4">CI/CD - Items Manager</h1>
       <p className="mb-4">Session ID: {sessionId}</p>
 
       {isLoadingItems ? (
